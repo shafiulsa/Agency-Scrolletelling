@@ -13,15 +13,9 @@ import * as THREE from "three";
 import { Star } from "../models/Star";
 import { MacBookPro } from "../models/MacBookPro";
 import { Laptop } from "../models/Laptop";
-import { PalmTree } from "../models/PalmTree";
 import { config } from "../../config";
-import { CouchSmall } from "../models/CouchSmall";
 import { Lamp } from "../models/Lamp";
-import { Monitor } from "../models/Monitor";
 import { Balloon } from "../models/Balloon";
-import { ParkBench } from "../models/ParkBench";
-import { Mailbox } from "../models/Mailbox";
-import { Pigeon } from "../models/Pigeon";
 import { motion } from "framer-motion-3d";
 import { MonitorScreen } from "./MonitorScreen";
 import { useControls, folder } from "leva";
@@ -51,7 +45,83 @@ function buildTransition(type, duration, ease, stiffness, damping) {
   return { type: "tween", duration, ease };
 }
 
+const RotatableModel = ({ children, initialRotationY = 0, ...props }) => {
+  const groupRef = useRef();
+  const [isDragging, setIsDragging] = useState(false);
+  const previousPointerX = useRef(0);
+  const rotationY = useRef(initialRotationY);
+  const [hovered, setHovered] = useState(false);
 
+  useEffect(() => {
+    if (isDragging) {
+      document.body.style.cursor = "grabbing";
+    } else if (hovered) {
+      document.body.style.cursor = "grab";
+    } else {
+      document.body.style.cursor = "auto";
+    }
+    return () => {
+      document.body.style.cursor = "auto";
+    };
+  }, [hovered, isDragging]);
+
+  useFrame((state, delta) => {
+    if (groupRef.current) {
+      if (!isDragging) {
+        // Slow continuous auto-rotation
+        rotationY.current += delta * 0.4;
+      }
+      groupRef.current.rotation.y = rotationY.current;
+    }
+  });
+
+  return (
+    <group
+      ref={groupRef}
+      {...props}
+      onPointerDown={(e) => {
+        e.stopPropagation();
+        setIsDragging(true);
+        previousPointerX.current = e.clientX;
+        if (e.nativeEvent && e.nativeEvent.target && e.nativeEvent.target.setPointerCapture) {
+          e.nativeEvent.target.setPointerCapture(e.pointerId);
+        }
+      }}
+      onPointerMove={(e) => {
+        if (isDragging) {
+          e.stopPropagation();
+          const deltaX = e.clientX - previousPointerX.current;
+          previousPointerX.current = e.clientX;
+          rotationY.current += deltaX * 0.015;
+        }
+      }}
+      onPointerUp={(e) => {
+        e.stopPropagation();
+        setIsDragging(false);
+        if (e.nativeEvent && e.nativeEvent.target && e.nativeEvent.target.releasePointerCapture) {
+          e.nativeEvent.target.releasePointerCapture(e.pointerId);
+        }
+      }}
+      onPointerCancel={(e) => {
+        e.stopPropagation();
+        setIsDragging(false);
+        if (e.nativeEvent && e.nativeEvent.target && e.nativeEvent.target.releasePointerCapture) {
+          e.nativeEvent.target.releasePointerCapture(e.pointerId);
+        }
+      }}
+      onPointerOver={(e) => {
+        e.stopPropagation();
+        setHovered(true);
+      }}
+      onPointerOut={(e) => {
+        e.stopPropagation();
+        setHovered(false);
+      }}
+    >
+      {children}
+    </group>
+  );
+};
 
 export const Experience = () => {
   const [section, setSection] = useState(config.sections[0]);
@@ -129,7 +199,7 @@ export const Experience = () => {
     Position: folder({
       mb_s_px: { label: "X", value: -1, min: -10, max: 10, step: 0.01 },
       mb_s_py: { label: "Y", value: 0.5, min: -5, max: 5, step: 0.01 },
-      mb_s_pz: { label: "Z", value: 2.5, min: -10, max: 10, step: 0.01 },
+      mb_s_pz: { label: "Z", value: .25, min: -10, max: 10, step: 0.01 },
     }),
     Rotation: folder({
       mb_s_rx: { label: "X", value: 0, min: -Math.PI, max: Math.PI, step: 0.01 },
@@ -137,7 +207,7 @@ export const Experience = () => {
       mb_s_rz: { label: "Z", value: 0, min: -Math.PI, max: Math.PI, step: 0.01 },
     }),
     "Scale & Float": folder({
-      mb_s_scale: { label: "Scale", value: 0.6, min: 0.1, max: 3, step: 0.01 },
+      mb_s_scale: { label: "Scale", value: 1, min: 0.1, max: 3, step: 0.01 },
       mb_s_float: { label: "Float Intensity", value: 1.2, min: 0, max: 5, step: 0.1 },
     }),
   });
@@ -338,7 +408,7 @@ export const Experience = () => {
           <group position-z={SECTION_DISTANCE * 3}>
             <SectionTitle position-x={-2} position-z={0.6}>Contact</SectionTitle>
 
-            <ParkBench scale={0.5} position-x={-1.5} position-z={-2.5} rotation-y={-Math.PI / 4} />
+            {/* <ParkBench scale={0.5} position-x={-1.5} position-z={-2.5} rotation-y={-Math.PI / 4} /> */}
 
             <group position-y={2.2} position-z={-0.5}>
               <Float floatIntensity={2} rotationIntensity={1.5}>
@@ -352,11 +422,11 @@ export const Experience = () => {
               </Float>
             </group>
 
-            <Mailbox scale={0.25} rotation-y={1.25 * Math.PI} position-x={1} position-y={0.25} position-z={0.5} />
+            {/* <Mailbox scale={0.25} rotation-y={1.25 * Math.PI} position-x={1} position-y={0.25} position-z={0.5} /> */}
 
-            <Float floatIntensity={1.5} speed={3}>
+            {/* <Float floatIntensity={1.5} speed={3}>
               <Pigeon position-x={2} position-y={1.5} position-z={-0.5} scale={0.3} />
-            </Float>
+            </Float> */}
           </group>
         )}
 
@@ -370,20 +440,24 @@ export const Experience = () => {
         {section === "showcase" && (
           <group position-z={SECTION_DISTANCE * 6}>
             <Float floatIntensity={1} speed={1.5}>
-              <Lamp position={[-2.5, -0.8, 0]} rotation-y={Math.PI / 5} />
+              <RotatableModel position={[-2.5, -0.8, 0]} initialRotationY={Math.PI / 5}>
+                <Lamp />
+              </RotatableModel>
             </Float>
 
             <Float floatIntensity={1.5} speed={2}>
-              <Laptop position={[0, 0.2, 0]} scale={0.5} rotation-y={-Math.PI / 8} />
+              <RotatableModel position={[0, 0.2, 0]} scale={0.5} initialRotationY={-Math.PI / 8}>
+                <Laptop />
+              </RotatableModel>
             </Float>
 
-            <Float floatIntensity={1} speed={1.8}>
+            {/* <Float floatIntensity={1} speed={1.8}>
               <Mailbox position={[2.5, 0.25, 0]} scale={0.28} rotation-y={-Math.PI * 0.75} />
-            </Float>
+            </Float> */}
 
-            <SectionTitle position-y={2} position-z={-2} size={0.6} bevelEnabled bevelThickness={0.2}>
+            {/* <SectionTitle position-y={2} position-z={-2} size={0.6} bevelEnabled bevelThickness={0.2}>
               Showcase
-            </SectionTitle>
+            </SectionTitle> */}
           </group>
         )}
 

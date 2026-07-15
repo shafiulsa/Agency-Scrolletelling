@@ -70,22 +70,28 @@ export const LoadingScreen = () => {
   const { progress } = useProgress();
   const [isLoaded, setIsLoaded] = useState(false);
   const [dissolveProgress, setDissolveProgress] = useState(0);
+  const [minTimeElapsed, setMinTimeElapsed] = useState(false);
 
   useEffect(() => {
-    if (progress === 100) {
-      setTimeout(() => {
-        setDissolveProgress(1);
-        setTimeout(() => setIsLoaded(true), 2500);
-      }, 1000);
+    const timer = setTimeout(() => {
+      setMinTimeElapsed(true);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (progress === 100 && minTimeElapsed) {
+      setDissolveProgress(1);
+      setTimeout(() => setIsLoaded(true), 2500);
     }
-  }, [progress]);
+  }, [progress, minTimeElapsed]);
 
   if (isLoaded) return null;
 
   return (
-    <div 
-      className="loading-screen" 
-      style={{ 
+    <div
+      className="loading-screen"
+      style={{
         background: dissolveProgress > 0 ? "transparent" : "#f5f3ee",
         pointerEvents: dissolveProgress > 0 ? "none" : "all",
         transition: "background 0.5s ease"
@@ -109,14 +115,15 @@ export const LoadingScreen = () => {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.8 } }}
           >
-            <motion.h1
-              className="loading-screen__text"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+            <motion.img
+              src="/logo-animated.gif"
+              alt="Logo"
+              className="loading-screen__logo"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
-            >
-              Bismillah
-            </motion.h1>
+              style={{ width: "200px", height: "auto", objectFit: "contain", marginBottom: "1rem" }}
+            />
             <div className="loading-screen__progress">
               <motion.div
                 className="loading-screen__progress__bar"

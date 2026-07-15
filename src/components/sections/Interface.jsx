@@ -11,6 +11,7 @@ import { ProjectsSection } from "./ProjectsSection";
 import { ContactSection } from "./ContactSection";
 import { MissionSection } from "./MissionSection";
 import { VisionSection } from "./VisionSection";
+import { ShowcaseSection } from "./ShowcaseSection";
 
 export const projectAtom = atom(config.projects[0]);
 
@@ -45,6 +46,9 @@ export const Interface = () => {
 
         {/* VISION */}
         <VisionSection vision={config.vision} />
+
+        {/* SHOWCASE */}
+        <ShowcaseSection />
       </div>
     </div>
   );

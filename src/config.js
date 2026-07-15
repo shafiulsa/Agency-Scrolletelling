@@ -1,5 +1,5 @@
 export const config = {
-    sections: ["home", "skills", "projects", "contact", "mission", "vision"],
+    sections: ["home", "skills", "projects", "contact", "mission", "vision", "showcase"],
     theme: {
         defaultBackground: "#f5f3ee",
         sections: {
@@ -20,6 +20,9 @@ export const config = {
             },
             vision: {
                 background: "#f8fbff",
+            },
+            showcase: {
+                background: "#0f172a",
             },
         },
     },

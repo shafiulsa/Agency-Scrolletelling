@@ -12,6 +12,7 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { Star } from "../models/Star";
 import { MacBookPro } from "../models/MacBookPro";
+import { Laptop } from "../models/Laptop";
 import { PalmTree } from "../models/PalmTree";
 import { config } from "../../config";
 import { CouchSmall } from "../models/CouchSmall";
@@ -156,8 +157,8 @@ useEffect(() => {
         <motion.group
           variants={variants}
           initial="visible"
-          animate={section === "mission" || section === "vision" ? "hidden" : "visible"}
-          visible={section !== "mission" && section !== "vision"}
+          animate={section === "mission" || section === "vision" || section === "showcase" ? "hidden" : "visible"}
+          visible={section !== "mission" && section !== "vision" && section !== "showcase"}
         >
           <Man scale={0.6} />
         </motion.group>
@@ -178,7 +179,7 @@ useEffect(() => {
                 position-x={-1}
                 position-y={0.5}
                 position-z={0}
-                scale={0.3}
+                scale={0.6}
                 rotation-y={Math.PI / 4}
               />
             </Float>
@@ -401,7 +402,53 @@ useEffect(() => {
             </group>
           </motion.group>
 
-          
+
+          {/* ================= SHOWCASE ================= */}
+          <motion.group
+            position-z={SECTION_DISTANCE * 6}
+            variants={variants}
+            initial="hidden"
+            animate={section === "showcase" ? "visible" : "hidden"}
+            visible={section === "showcase"}
+          >
+            {/* Lamp — left side */}
+            <Float floatIntensity={1} speed={1.5}>
+              <Lamp
+                position={[-2.5, -0.8, 0]}
+                rotation-y={Math.PI / 5}
+              />
+            </Float>
+
+            {/* Laptop — centre */}
+            <Float floatIntensity={1.5} speed={2}>
+              <Laptop
+                position={[0, 0.2, 0]}
+                scale={0.5}
+                rotation-y={-Math.PI / 8}
+              />
+            </Float>
+
+            {/* Mailbox — right side */}
+            <Float floatIntensity={1} speed={1.8}>
+              <Mailbox
+                position={[2.5, 0.25, 0]}
+                scale={0.28}
+                rotation-y={-Math.PI * 0.75}
+              />
+            </Float>
+
+            {/* Subtle title */}
+            <SectionTitle
+              position-y={2}
+              position-z={-2}
+              size={0.6}
+              bevelEnabled
+              bevelThickness={0.2}
+            >
+              Showcase
+            </SectionTitle>
+          </motion.group>
+
         </motion.group>
       </>
       );

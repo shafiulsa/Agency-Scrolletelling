@@ -15,8 +15,7 @@ function App() {
       <LoadingScreen />
       {/* <Leva hidden/> */}
       <Canvas camera={{ position: [0, 0.5, 5], fov: 42 }}>
-        <color attach="background" args={[config.theme.defaultBackground]} />
-        <fog attach="fog" args={[config.theme.defaultBackground, 10, 50]} />
+        <fog attach="fog" args={["#080d1a", 15, 100]} />
 
         <ScrollControls pages={config.sections.length} damping={0.1} maxSpeed={0.2}>
           <SectionBackground />

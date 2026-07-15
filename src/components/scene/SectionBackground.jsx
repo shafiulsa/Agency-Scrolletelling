@@ -20,7 +20,9 @@ export const SectionBackground = () => {
     const currentSection = config.sections[sectionIndex];
 
     targetColor.set(getSectionBackground(currentSection));
-    scene.background.lerp(targetColor, 0.08);
+    if (scene.background) {
+      scene.background.lerp(targetColor, 0.08);
+    }
 
     if (scene.fog) {
       scene.fog.color.lerp(targetColor, 0.08);

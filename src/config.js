@@ -1,35 +1,35 @@
 export const config = {
     sections: ["home", "skills", "projects", "contact", "mission", "vision", "showcase"],
     theme: {
-        defaultBackground: "#f5f3ee",
+        defaultBackground: "#080d1a",
         sections: {
             home: {
-                background: "#f5f3ee",
+                background: "#080d1a",
             },
             skills: {
-                background: "#eef7f6",
+                background: "#0a1128",
             },
             projects: {
-                background: "#f4f0ff",
+                background: "#0f172a",
             },
             contact: {
-                background: "#fff4e8",
+                background: "#0a0f1d",
             },
             mission: {
-                background: "#eff6ff",
+                background: "#080d1a",
             },
             vision: {
-                background: "#f8fbff",
+                background: "#0b132b",
             },
             showcase: {
-                background: "#0f172a",
+                background: "#030712",
             },
         },
     },
 
     home: {
-        title: "Hi",
-        description: " Developer",
+        title: "We Build Brand ",
+        description: "That Stand Out",
     },
     skills: [
         {

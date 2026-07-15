@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap");
 
 :root {
-  --primary-color: #4668ee;
-  --text-color: #1a202c;
-  --text-light-color: #555;
+  --primary-color: #38bdf8;
+  --text-color: #f8fafc;
+  --text-light-color: #94a3b8;
 }
 
 #root {
@@ -13,6 +13,9 @@
 
 body {
   margin: 0;
+  background: linear-gradient(135deg, #050811 0%, #0a1128 35%, #101f42 70%, #030712 100%);
+  background-attachment: fixed;
+  color: var(--text-color);
 }
 
 * {
@@ -58,7 +61,7 @@ a {
 .section--down{
   width: 28px;
   height: 42px;
-  border: 2px solid #1A202C;
+  border: 2px solid var(--text-color);
   border-radius: 12px;
   display: flex;
   justify-content: center;
@@ -67,7 +70,7 @@ a {
 .scroll-down__wheel{
   width: 3px;
   height: 10px;
-  background-color: #1A202C;
+  background-color: var(--text-color);
   margin-top: 5px;
   border-radius: 4px;
 }
@@ -79,8 +82,9 @@ a {
 }
 
 .skill {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1rem;
@@ -106,7 +110,7 @@ a {
 }
 
 .skill__level {
-  background: #000;
+  background: rgba(255, 255, 255, 0.08);
   height: 8px;
   border-radius: 8px;
   width: 100%;
@@ -131,11 +135,12 @@ a {
 
 /* Individual Project Card */
 .project {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   overflow: hidden;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
   border-radius: 8px;
-  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
 .project__image {
   width: 100%;
@@ -143,7 +148,8 @@ a {
   object-fit: cover;    /* Crops them perfectly to fit */
 }
 .project:hover {
-  background: white;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(56, 189, 248, 0.4);
   transform: scale(1.05);
   cursor: pointer;
 }
@@ -190,9 +196,10 @@ a {
   min-height: 620px;
   overflow: hidden;
   border-radius: 8px;
-  background: #f8fafc;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.12);
+  background: rgba(10, 15, 30, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
 }
 
 .mission-stage {
@@ -208,8 +215,8 @@ a {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(248, 250, 252, 0.96), rgba(248, 250, 252, 0.76)),
-    repeating-linear-gradient(90deg, rgba(70, 104, 238, 0.08) 0 1px, transparent 1px 84px);
+    linear-gradient(90deg, rgba(10, 15, 30, 0.95), rgba(10, 15, 30, 0.75)),
+    repeating-linear-gradient(90deg, rgba(56, 189, 248, 0.05) 0 1px, transparent 1px 84px);
   pointer-events: none;
 }
 
@@ -229,7 +236,7 @@ a {
 
 .mission-title,
 .vision-title {
-  color: #0f172a;
+  color: #f8fafc;
   font-family: "Roboto Slab", serif;
   line-height: 0.95;
   margin: 0;
@@ -241,7 +248,7 @@ a {
 
 .mission-description,
 .vision-description {
-  color: #475569;
+  color: #94a3b8;
   font-size: 1.05rem;
   line-height: 1.75;
   margin: 1.25rem 0 0;
@@ -269,8 +276,8 @@ a {
 .vision-tile {
   min-height: 128px;
   padding: 1.25rem;
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 8px;
 }
 
@@ -287,7 +294,7 @@ a {
 
 .mission-pillar p,
 .vision-tile p {
-  color: #0f172a;
+  color: #f8fafc;
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.45;
@@ -300,8 +307,8 @@ a {
   gap: 2rem;
   padding: 3.25rem;
   background:
-    radial-gradient(circle at 85% 18%, rgba(250, 204, 21, 0.2), transparent 28%),
-    linear-gradient(135deg, #ffffff 0%, #eef6ff 52%, #f8fafc 100%);
+    radial-gradient(circle at 85% 18%, rgba(56, 189, 248, 0.15), transparent 35%),
+    rgba(10, 15, 30, 0.55);
 }
 
 .vision-header {
@@ -332,7 +339,8 @@ a {
 }
 
 .vision-tile {
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
 }
 
@@ -400,8 +408,9 @@ a {
   top: 0;
   left: 4rem;
   right: 4rem;
-  background: #f5f3ef8a;
-  backdrop-filter: blur(8px);
+  background: rgba(10, 15, 30, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
 }
 .menu__logo {
   height: 42px;

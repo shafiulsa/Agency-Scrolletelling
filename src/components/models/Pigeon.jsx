@@ -14,11 +14,14 @@ export function Pigeon(props) {
   const [animation, setAnimation] = useState("Flying_Idle");
   const { actions } = useAnimations(animations, group);
   useEffect(() => {
-    actions[animation].reset().fadeIn(0.5).play();
-    return () => {
-      actions[animation].reset().fadeOut(0.5);
+    const action = actions?.[animation];
+    if (action) {
+      action.reset().fadeIn(0.5).play();
+      return () => {
+        action.fadeOut(0.5);
+      };
     }
-  }, [animation])
+  }, [animation, actions]);
 
   return (
     <group {...props} dispose={null} ref={group} onPointerEnter={()=> setAnimation("Yes")} onPointerDown={()=> setAnimation("Flying_Idle")}>

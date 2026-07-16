@@ -1,4 +1,13 @@
+@import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap");
+
+@theme {
+  --color-brand-navy: #0d1734;
+  --color-brand-lime: #ccff00;
+  --color-brand-slate: #f8fafc;
+}
+
+
 
 :root {
   --primary-color: #38bdf8;

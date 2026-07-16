@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { config } from "../../config";
+import { TextReveal } from "../ui/TextReveal";
 
 export const SkillsSection = () => {
   return (
@@ -31,8 +32,13 @@ export const SkillsSection = () => {
                 src={skill.icon}
                 alt={skill.name}
               />
-              <h2 className="skill__label__name">{skill.name}</h2>
+              <h2 className="skill__label__name">
+                <TextReveal trigger="scroll" delay={idx * 0.05}>
+                  {skill.name}
+                </TextReveal>
+              </h2>
             </div>
+
             <div className="skill__level">
               <motion.div
                 className="skill__level__bar"

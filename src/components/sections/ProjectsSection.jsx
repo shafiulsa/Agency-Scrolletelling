@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { config } from "../../config";
 import { useAtom } from "jotai";
 import { projectAtom } from "./Interface";
+import { TextReveal } from "../ui/TextReveal";
 
 export const ProjectsSection = () => {
   const [_project, setProject] = useAtom(projectAtom);
@@ -37,9 +38,15 @@ export const ProjectsSection = () => {
                 alt={project.name}
               />
               <div className="project__details">
-                <h2 className="project__details__name">{project.name}</h2>
+                <h2 className="project__details__name">
+                  <TextReveal trigger="scroll" delay={idx * 0.05}>
+                    {project.name}
+                  </TextReveal>
+                </h2>
                 <p className="project__details__description">
-                  {project.description}
+                  <TextReveal trigger="scroll" delay={idx * 0.05 + 0.15} textColor="#94a3b8">
+                    {project.description}
+                  </TextReveal>
                 </p>
               </div>
             </a>
@@ -49,3 +56,4 @@ export const ProjectsSection = () => {
     </section>
   );
 };
+

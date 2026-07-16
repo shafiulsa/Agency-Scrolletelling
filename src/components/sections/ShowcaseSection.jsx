@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { TextReveal } from "../ui/TextReveal";
 
 export const ShowcaseSection = () => {
   return (
@@ -21,11 +22,20 @@ export const ShowcaseSection = () => {
           }}
           transition={{ duration: 0.75 }}
         >
-          <p className="showcase-kicker">Interactive Models</p>
-          <h1 className="showcase-title">3D Showcase</h1>
+          <p className="showcase-kicker">
+            <TextReveal trigger="scroll">
+              Interactive Models
+            </TextReveal>
+          </p>
+          <h1 className="showcase-title">
+            <TextReveal trigger="scroll" delay={0.15}>
+              3D Showcase
+            </TextReveal>
+          </h1>
           <p className="showcase-description">
-            A curated collection of 3D assets built and integrated with
-            React Three Fiber — lighting, geometry, and animation all in one.
+            <TextReveal trigger="scroll" delay={0.3} textColor="#94a3b8">
+              A curated collection of 3D assets built and integrated with React Three Fiber — lighting, geometry, and animation all in one.
+            </TextReveal>
           </p>
         </motion.div>
 
@@ -53,8 +63,16 @@ export const ShowcaseSection = () => {
               transition={{ duration: 0.55, delay: 0.3 + idx * 0.12 }}
             >
               <span className="showcase-label__icon">{item.icon}</span>
-              <span className="showcase-label__name">{item.name}</span>
-              <span className="showcase-label__desc">{item.desc}</span>
+              <span className="showcase-label__name">
+                <TextReveal trigger="scroll" delay={0.25 + idx * 0.1}>
+                  {item.name}
+                </TextReveal>
+              </span>
+              <span className="showcase-label__desc">
+                <TextReveal trigger="scroll" delay={0.25 + idx * 0.1 + 0.1} textColor="#64748b">
+                  {item.desc}
+                </TextReveal>
+              </span>
             </motion.div>
           ))}
         </motion.div>

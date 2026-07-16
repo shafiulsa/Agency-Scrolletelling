@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { config } from "../../config";
+import { TextReveal } from "../ui/TextReveal";
 
 export const ContactSection = () => {
   return (
@@ -12,8 +13,16 @@ export const ContactSection = () => {
           visible: { opacity: 1 },
         }}
       >
-        <h1 className="contact__name">{config.contact.name}</h1>
-        <p className="contact__address">{config.contact.address}</p>
+        <h1 className="contact__name">
+          <TextReveal trigger="scroll">
+            {config.contact.name}
+          </TextReveal>
+        </h1>
+        <p className="contact__address">
+          <TextReveal trigger="scroll" delay={0.15} textColor="#94a3b8">
+            {config.contact.address}
+          </TextReveal>
+        </p>
         <div className="contact__socials">
           <a href={config.contact.socials.linkedin} target="_blank" rel="noreferrer">
             <img

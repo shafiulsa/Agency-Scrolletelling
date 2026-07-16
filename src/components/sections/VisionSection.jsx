@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { TextReveal } from "../ui/TextReveal";
 
 export const VisionSection = ({ vision }) => {
   return (
@@ -20,9 +21,21 @@ export const VisionSection = ({ vision }) => {
           }}
           transition={{ duration: 0.75 }}
         >
-          <p className="section-kicker">{vision.subtitle}</p>
-          <h1 className="vision-title">{vision.title}</h1>
-          <p className="vision-description">{vision.description}</p>
+          <p className="section-kicker">
+            <TextReveal trigger="scroll">
+              {vision.subtitle}
+            </TextReveal>
+          </p>
+          <h1 className="vision-title">
+            <TextReveal trigger="scroll" delay={0.15}>
+              {vision.title}
+            </TextReveal>
+          </h1>
+          <p className="vision-description">
+            <TextReveal trigger="scroll" delay={0.3} textColor="#94a3b8">
+              {vision.description}
+            </TextReveal>
+          </p>
         </motion.div>
 
         <motion.div
@@ -82,7 +95,11 @@ export const VisionSection = ({ vision }) => {
                 transition={{ duration: 0.55, delay: 0.25 + index * 0.12 }}
               >
                 <span className="vision-tile__label">Future 0{index + 1}</span>
-                <p>{point}</p>
+                <p>
+                  <TextReveal trigger="scroll" delay={0.25 + index * 0.1}>
+                    {point}
+                  </TextReveal>
+                </p>
               </motion.div>
             ))}
           </div>

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { TextReveal } from "../ui/TextReveal";
 
 export const MissionSection = ({ mission }) => {
   return (
@@ -20,9 +21,21 @@ export const MissionSection = ({ mission }) => {
           }}
           transition={{ duration: 0.8 }}
         >
-          <p className="section-kicker">{mission.subtitle}</p>
-          <h1 className="mission-title">{mission.title}</h1>
-          <p className="mission-description">{mission.description}</p>
+          <p className="section-kicker">
+            <TextReveal trigger="scroll">
+              {mission.subtitle}
+            </TextReveal>
+          </p>
+          <h1 className="mission-title">
+            <TextReveal trigger="scroll" delay={0.15}>
+              {mission.title}
+            </TextReveal>
+          </h1>
+          <p className="mission-description">
+            <TextReveal trigger="scroll" delay={0.3} textColor="#94a3b8">
+              {mission.description}
+            </TextReveal>
+          </p>
         </motion.div>
 
         <motion.div
@@ -88,7 +101,11 @@ export const MissionSection = ({ mission }) => {
               transition={{ duration: 0.55, delay: 0.2 + index * 0.12 }}
             >
               <span className="mission-pillar__number">0{index + 1}</span>
-              <p>{point}</p>
+              <p>
+                <TextReveal trigger="scroll" delay={0.25 + index * 0.1}>
+                  {point}
+                </TextReveal>
+              </p>
             </motion.div>
           ))}
         </div>

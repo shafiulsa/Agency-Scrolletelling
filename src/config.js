@@ -2,6 +2,8 @@ export const config = {
     sections: ["home", "skills", "projects", "contact", "mission", "vision", "showcase"],
     theme: {
         defaultBackground: "#080d1a",
+        /** Central colour for the neon reveal block used across all TextReveal components */
+        revealBlock: "#4c1dceff",
         sections: {
             home: {
                 background: "#080d1a",

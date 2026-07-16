@@ -1,59 +1,32 @@
-import { motion } from "framer-motion";
 import { config } from "../../config";
-import { useAtom } from "jotai";
-import { projectAtom } from "./Interface";
+import { AnnotationPanel } from "../ui/AnnotationPanel";
 import { TextReveal } from "../ui/TextReveal";
 
 export const ProjectsSection = () => {
-  const [_project, setProject] = useAtom(projectAtom);
-
   return (
-    <section className="section section--left">
-      <motion.div
-        className="projects"
-        whileInView={"visible"}
-        initial={{ opacity: 0 }}
-        variants={{
-          visible: { opacity: 1 },
-        }}
-      >
-        {config.projects.map((project, idx) => (
-          <motion.div
-            key={project.name}
-            className="project"
-            initial={{ opacity: 0 }}
-            onMouseEnter={() => setProject(project)}
-            variants={{
-              visible: { opacity: 1 },
-            }}
-            transition={{
-              duration: 1,
-              delay: idx * 0.5,
-            }}
-          >
-            <a href={project.link} target="_blank" rel="noreferrer">
-              <img
-                className="project__image"
-                src={project.image}
-                alt={project.name}
-              />
-              <div className="project__details">
-                <h2 className="project__details__name">
-                  <TextReveal trigger="scroll" delay={idx * 0.05}>
-                    {project.name}
-                  </TextReveal>
-                </h2>
-                <p className="project__details__description">
-                  <TextReveal trigger="scroll" delay={idx * 0.05 + 0.15} textColor="#94a3b8">
-                    {project.description}
-                  </TextReveal>
-                </p>
-              </div>
-            </a>
-          </motion.div>
-        ))}
-      </motion.div>
+    <section className="section">
+      <div className="w-full flex items-center px-8 md:px-14 gap-8">
+
+        {/* ── LEFT: Gap for 3D model in canvas ── */}
+        <div className="flex-1" />
+
+        {/* ── RIGHT: Annotation panel ── */}
+        <div className="w-[45%] shrink-0">
+          {/* Section heading */}
+          <h2 className="text-xs font-bold uppercase tracking-[0.25em] text-[#ccff00]/50 mb-1 text-right">
+            <TextReveal trigger="scroll">Portfolio</TextReveal>
+          </h2>
+          <p className="text-3xl md:text-4xl font-bold text-[#F8FAFC] mb-8 leading-tight text-right">
+            <TextReveal trigger="scroll" delay={0.15}>Projects</TextReveal>
+          </p>
+
+          <AnnotationPanel
+            categories={config.projectCategories}
+            side="right"
+            kicker="Project Categories"
+          />
+        </div>
+      </div>
     </section>
   );
 };
-

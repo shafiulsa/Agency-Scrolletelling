@@ -1,62 +1,32 @@
-import { motion } from "framer-motion";
 import { config } from "../../config";
+import { AnnotationPanel } from "../ui/AnnotationPanel";
 import { TextReveal } from "../ui/TextReveal";
 
 export const SkillsSection = () => {
   return (
-    <section className="section section--right">
-      <motion.div
-        className="skills"
-        whileInView={"visible"}
-        initial={{ opacity: 0 }}
-        variants={{
-          visible: { opacity: 1 },
-        }}
-      >
-        {config.skills.map((skill, idx) => (
-          <motion.div
-            key={skill.name}
-            className="skill"
-            initial={{ opacity: 0 }}
-            variants={{
-              visible: { opacity: 1 },
-            }}
-            transition={{
-              duration: 1,
-              delay: idx * 0.2,
-            }}
-          >
-            <div className="skill__label">
-              <img
-                className="skill__label__image"
-                src={skill.icon}
-                alt={skill.name}
-              />
-              <h2 className="skill__label__name">
-                <TextReveal trigger="scroll" delay={idx * 0.05}>
-                  {skill.name}
-                </TextReveal>
-              </h2>
-            </div>
+    <section className="section">
+      <div className="w-full flex items-center px-8 md:px-14 gap-8">
 
-            <div className="skill__level">
-              <motion.div
-                className="skill__level__bar"
-                initial={{ width: 0 }}
-                variants={{
-                  visible: {
-                    width: `${skill.level}%`,
-                  },
-                }}
-                transition={{
-                  duration: 1,
-                  delay: 1 + idx * 0.2,
-                }}
-              />
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
+        {/* ── LEFT: Annotation panel ── */}
+        <div className="w-[45%] shrink-0">
+          {/* Section heading */}
+          <h2 className="text-xs font-bold uppercase tracking-[0.25em] text-[#ccff00]/50 mb-1">
+            <TextReveal trigger="scroll">Capabilities</TextReveal>
+          </h2>
+          <p className="text-3xl md:text-4xl font-bold text-[#F8FAFC] mb-8 leading-tight">
+            <TextReveal trigger="scroll" delay={0.15}>Skills</TextReveal>
+          </p>
+
+          <AnnotationPanel
+            categories={config.skillCategories}
+            side="left"
+            kicker="Expertise Breakdown"
+          />
+        </div>
+        {/* ── RIGHT: Gap for 3D model in canvas ── */}
+        <div className="flex-1" />
+
+      </div>
     </section>
   );
 };

@@ -30,9 +30,37 @@ export const config = {
     },
 
     home: {
-        title: "We Build Brand ",
-        description: "That Stand Out",
+        title: "We Build Brand",
+        subtitle: "That Stands Out",
     },
+    skillCategories: [
+        {
+            label: "Frontend",
+            items: ["React & React Three Fiber", "JavaScript / TypeScript", "Tailwind CSS & Animations"],
+        },
+        {
+            label: "3D & Creative",
+            items: ["Three.js & WebGL", "Blender 3D Modeling", "GSAP Motion Systems"],
+        },
+        {
+            label: "Engineering",
+            items: ["Performance Optimization", "Clean Architecture", "API & Backend Integration"],
+        },
+    ],
+    projectCategories: [
+        {
+            label: "Web Applications",
+            items: ["Full-Stack React Apps", "Node.js REST APIs", "Database Architecture"],
+        },
+        {
+            label: "3D Experiences",
+            items: ["WebGL & R3F Scenes", "Interactive 3D Models", "Custom GLSL Shaders"],
+        },
+        {
+            label: "Creative Dev",
+            items: ["Motion & Scroll Design", "GSAP Timeline Systems", "Reusable Components"],
+        },
+    ],
     skills: [
         {
             name: "React",

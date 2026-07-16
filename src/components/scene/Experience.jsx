@@ -368,7 +368,7 @@ const {
         {/* HOME — only mounted when active */}
         {section === "home" && (
           <group position-z={0}>
-            <Star position-z={0} position-y={1.3} scale={0.3} />
+            {/* <Star position-z={0} position-y={1.3} scale={0.3} /> */}
 
             {/* <Float floatIntensity={0.6}>
               <SectionTitle size={0.8} position-y={1.6} position-z={-3} position-x={2} bevelEnabled bevelThickness={0.3}>

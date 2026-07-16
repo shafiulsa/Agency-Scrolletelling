@@ -234,6 +234,30 @@ export const Experience = () => {
     }),
   });
 
+
+
+  // Phobe 
+const {
+  mobile_px, mobile_py, mobile_pz,
+  mobile_rx, mobile_ry, mobile_rz,
+  mobile_scale, mobile_float,
+} = useControls("📱 Mobile — Home", {
+  Position: folder({
+    mobile_px: { label: "X", value: 1.6, min: -10, max: 10, step: 0.01 },
+    mobile_py: { label: "Y", value: 0.51, min: -5, max: 5, step: 0.01 },
+    mobile_pz: { label: "Z", value: -2.6, min: -10, max: 10, step: 0.01 },
+  }),
+  Rotation: folder({
+    mobile_rx: { label: "X", value: 0, min: -Math.PI, max: Math.PI, step: 0.01 },
+    mobile_ry: { label: "Y", value: -0.6, min: -Math.PI, max: Math.PI, step: 0.01 },
+    mobile_rz: { label: "Z", value: -.1, min: -Math.PI, max: Math.PI, step: 0.01 },
+  }),
+  "Scale & Float": folder({
+    mobile_scale: { label: "Scale", value: 0.48, min: 0.1, max: 3, step: 0.01 },
+    mobile_float: { label: "Float Intensity", value: 1.0, min: 0, max: 5, step: 0.1 },
+  }),
+});
+
   // ─── Active transition config (chosen by section pair) ──────────────────────
   const [macTransition, setMacTransition] = useState(
     buildTransition("tween", 0.8, "easeOut", 80, 14)
@@ -358,11 +382,18 @@ export const Experience = () => {
               </SectionTitle>
             </Center> */}
 
-            <Mobile
+            {/* <Mobile
               position={[1.6, 0, -2.6]}
               rotation={[0, -.5, 0]}
               scale={0.7}
-            />
+            /> */}
+              <Float floatIntensity={mobile_float} speed={1.8}>
+      <Mobile
+        position={[mobile_px, mobile_py, mobile_pz]}
+        rotation={[mobile_rx, mobile_ry, mobile_rz]}
+        scale={mobile_scale}
+      />
+    </Float>
           </group>
         )}
 
